@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Assistant", system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-brand-black: #0a0a0a;
+  --color-brand-gray-dark: #1a1a1a;
+  --color-brand-gray: #2e2e2e;
+  --color-brand-gray-light: #4a4a4a;
+  --color-brand-gold: #c5a059; /* Gold accent often goes well with elegant black/gray */
+}
+
+@layer base {
+  body {
+    @apply text-slate-100 bg-brand-black;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e2e2e;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+
+
