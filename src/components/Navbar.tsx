@@ -26,10 +26,8 @@ export default function Navbar() {
       const yOffset = -90; // header offset
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
-      window.history.pushState(null, '', path);
-    } else {
-      navigate(path);
     }
+    navigate(path);
   };
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ShieldCheck, Building2, Ruler } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { getAssetUrl } from '../utils/assets';
 import About from './About';
 import Services from './Services';
@@ -15,13 +16,16 @@ const fadeIn = {
 };
 
 export default function Home() {
-  const scrollToSection = (id: string) => {
+  const navigate = useNavigate();
+
+  const scrollToSection = (id: string, path: string) => {
     const element = document.getElementById(id);
     if (element) {
       const yOffset = -90;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
+    navigate(path);
   };
 
   return (
@@ -63,13 +67,13 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <button 
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection('contact', '/contact')}
                 className="w-full sm:w-auto px-10 py-5 bg-white text-brand-black hover:bg-brand-gold hover:text-brand-black transition-all duration-300 rounded-sm font-bold text-lg tracking-wide uppercase cursor-pointer"
               >
                 צור קשר לייעוץ
               </button>
               <button 
-                onClick={() => scrollToSection('services')}
+                onClick={() => scrollToSection('services', '/services')}
                 className="w-full sm:w-auto px-10 py-5 border border-white/20 text-white hover:bg-white hover:text-brand-black transition-all duration-300 rounded-sm font-bold text-lg tracking-wide uppercase cursor-pointer"
               >
                 השירותים שלנו
@@ -83,7 +87,7 @@ export default function Home() {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute bottom-6 left-1/2 -translate-x-1/2 text-brand-gold/50 cursor-pointer"
-          onClick={() => scrollToSection('about')}
+          onClick={() => scrollToSection('about', '/about')}
         >
           <div className="w-[1px] h-10 bg-gradient-to-b from-brand-gold to-transparent" />
         </motion.div>

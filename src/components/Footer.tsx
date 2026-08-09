@@ -1,9 +1,22 @@
 import { Phone, Mail, Facebook } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAssetUrl } from '../utils/assets';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+
+  const handleNav = (id: string, path: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -90;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    navigate(path);
+  };
 
   return (
     <footer className="bg-brand-black text-slate-400 pt-10 pb-12 font-sans border-t border-white/5" dir="rtl">
@@ -13,7 +26,10 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link 
               to="/" 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav('home', '/');
+              }} 
               className="flex items-center gap-4 mb-10 group"
             >
               <img 
@@ -36,11 +52,11 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold tracking-widest uppercase text-sm md:text-[15px] mb-8 pb-3 border-b border-brand-gold/30 inline-block">קישורים</h3>
             <ul className="space-y-4 text-base font-normal">
-              <li><Link to="/about" className="hover:text-brand-gold transition-colors">אודותינו</Link></li>
-              <li><Link to="/services" className="hover:text-brand-gold transition-colors">השירותים שלנו</Link></li>
-              <li><Link to="/process" className="hover:text-brand-gold transition-colors">תהליך העבודה</Link></li>
-              <li><Link to="/gallery" className="hover:text-brand-gold transition-colors">דוגמאות לעבודות</Link></li>
-              <li><Link to="/contact" className="hover:text-brand-gold transition-colors">צור קשר</Link></li>
+              <li><Link to="/about" onClick={(e) => { e.preventDefault(); handleNav('about', '/about'); }} className="hover:text-brand-gold transition-colors">אודותינו</Link></li>
+              <li><Link to="/services" onClick={(e) => { e.preventDefault(); handleNav('services', '/services'); }} className="hover:text-brand-gold transition-colors">השירותים שלנו</Link></li>
+              <li><Link to="/process" onClick={(e) => { e.preventDefault(); handleNav('process', '/process'); }} className="hover:text-brand-gold transition-colors">תהליך העבודה</Link></li>
+              <li><Link to="/gallery" onClick={(e) => { e.preventDefault(); handleNav('gallery', '/gallery'); }} className="hover:text-brand-gold transition-colors">דוגמאות לעבודות</Link></li>
+              <li><Link to="/contact" onClick={(e) => { e.preventDefault(); handleNav('contact', '/contact'); }} className="hover:text-brand-gold transition-colors">צור קשר</Link></li>
             </ul>
           </div>
 
