@@ -75,7 +75,7 @@ export default function Services() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.15, duration: 0.6 }}
+                  transition={{ duration: 0.4 }}
                   className="bg-brand-gray-dark/40 p-8 rounded-sm border border-white/5 hover:border-brand-gold/30 transition-all duration-300 text-center flex flex-col items-center"
                 >
                   {/* Title without circle span */}
