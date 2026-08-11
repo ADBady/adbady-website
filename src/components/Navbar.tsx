@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Phone } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getAssetUrl } from '../utils/assets';
 
 const navLinks = [
@@ -47,19 +47,34 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isInitialMount = useRef(true);
+
   // Handle initial scroll if hash or path matches
   useEffect(() => {
     const currentPath = location.pathname;
     const matchedLink = navLinks.find(link => link.path === currentPath);
-    if (matchedLink && matchedLink.id !== 'home') {
-      setTimeout(() => {
+    if (matchedLink) {
+      const scrollTarget = (behavior: ScrollBehavior) => {
+        if (matchedLink.id === 'home') {
+          if (isInitialMount.current) {
+            window.scrollTo({ top: 0, behavior });
+          }
+          return;
+        }
         const el = document.getElementById(matchedLink.id);
         if (el) {
           const yOffset = -90;
           const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
+          window.scrollTo({ top: y, behavior });
         }
-      }, 100);
+      };
+
+      if (isInitialMount.current) {
+        scrollTarget('instant' as ScrollBehavior);
+        // Execute again on next frame in case layout/fonts settle
+        requestAnimationFrame(() => scrollTarget('instant' as ScrollBehavior));
+        isInitialMount.current = false;
+      }
     }
   }, [location.pathname]);
 
