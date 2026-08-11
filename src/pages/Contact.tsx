@@ -59,7 +59,7 @@ export default function Contact() {
     }
   };
   return (
-    <div id="contact" className="bg-brand-black pt-12 border-t border-white/5" dir="rtl">
+    <div id="contact" className="bg-brand-black pt-12 border-t border-white/5 scroll-mt-[90px]" dir="rtl">
       {/* Header Section */}
       <section className="relative py-24 border-b border-white/5 overflow-hidden">
         <div className="absolute inset-0 z-0">

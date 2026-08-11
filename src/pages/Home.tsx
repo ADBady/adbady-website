@@ -22,16 +22,14 @@ export default function Home() {
     navigate(path);
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -90;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <div className="font-sans text-slate-100 selection:bg-brand-gold selection:text-brand-black" dir="rtl">
       {/* Hero Section */}
-      <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-brand-black pt-12">
+      <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-brand-black pt-12 scroll-mt-[90px]">
         {/* Abstract background elements */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-gold/5 rounded-full blur-[120px]" />

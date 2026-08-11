@@ -18,7 +18,7 @@ const drawings = [
 
 export default function Gallery() {
   return (
-    <div id="gallery" className="bg-brand-black pt-12 border-t border-white/5" dir="rtl">
+    <div id="gallery" className="bg-brand-black pt-12 border-t border-white/5 scroll-mt-[90px]" dir="rtl">
       {/* Header Section */}
       <section className="relative py-24 border-b border-white/5 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -27,7 +27,6 @@ export default function Gallery() {
             src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2600&auto=format&fit=crop" 
             alt="דוגמאות לתשריטים דיגיטליים - א. ד. באדי" 
             className="w-full h-full object-cover"
-            loading="lazy"
             referrerPolicy="no-referrer"
           />
         </div>
@@ -65,7 +64,6 @@ export default function Gallery() {
                       src={item.image} 
                       alt={item.title} 
                       className="w-auto max-w-full h-auto max-h-[650px] block transition-transform duration-700 group-hover:scale-[1.02]"
-                      loading="lazy"
                       referrerPolicy="no-referrer"
                     />
                   </div>
@@ -93,7 +91,6 @@ export default function Gallery() {
               src={getAssetUrl("/images/digital_hologram_blueprint_1785779941645.jpg")} 
               alt="תשריט דיגיטלי מתקדם ומדויק" 
               className="w-full h-[400px] md:h-[520px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
-              loading="lazy"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/20 to-transparent flex items-end justify-center p-8 md:p-10 text-center">

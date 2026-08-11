@@ -29,13 +29,11 @@ export default function Navbar() {
     const element = document.getElementById(id);
     if (element) {
       isScrollingToRef.current = true;
-      const yOffset = -90; // header offset
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' });
 
       setTimeout(() => {
         isScrollingToRef.current = false;
-      }, 1000);
+      }, 800);
     }
   };
 
@@ -82,9 +80,7 @@ export default function Navbar() {
         }
         const el = document.getElementById(matchedLink.id);
         if (el) {
-          const yOffset = -90;
-          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior });
+          el.scrollIntoView({ behavior });
         }
       };
 
