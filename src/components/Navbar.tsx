@@ -70,9 +70,9 @@ export default function Navbar() {
       };
 
       if (isInitialMount.current) {
-        scrollTarget('instant' as ScrollBehavior);
+        scrollTarget('auto');
         // Execute again on next frame in case layout/fonts settle
-        requestAnimationFrame(() => scrollTarget('instant' as ScrollBehavior));
+        requestAnimationFrame(() => scrollTarget('auto'));
         isInitialMount.current = false;
       }
     }
