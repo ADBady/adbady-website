@@ -19,28 +19,30 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isScrollingToRef = useRef(false);
+
   const scrollToSection = (id: string, path: string) => {
     setIsOpen(false);
     setActiveSection(id);
     navigate(path);
 
-    const performScroll = () => {
-      const element = document.getElementById(id);
-      if (element) {
-        const yOffset = -90; // header offset
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    };
+    const element = document.getElementById(id);
+    if (element) {
+      isScrollingToRef.current = true;
+      const yOffset = -90; // header offset
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
 
-    performScroll();
-    requestAnimationFrame(() => performScroll());
-    setTimeout(performScroll, 150);
-    setTimeout(performScroll, 350);
+      setTimeout(() => {
+        isScrollingToRef.current = false;
+      }, 1000);
+    }
   };
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isScrollingToRef.current) return;
+
       const scrollPosition = window.scrollY + 200;
       
       // If reached bottom of page, highlight contact

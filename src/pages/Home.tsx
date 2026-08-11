@@ -20,18 +20,12 @@ export default function Home() {
 
   const scrollToSection = (id: string, path: string) => {
     navigate(path);
-    const performScroll = () => {
-      const element = document.getElementById(id);
-      if (element) {
-        const yOffset = -90;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    };
-    performScroll();
-    requestAnimationFrame(() => performScroll());
-    setTimeout(performScroll, 150);
-    setTimeout(performScroll, 350);
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -90;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
