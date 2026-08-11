@@ -21,18 +21,35 @@ export default function Navbar() {
 
   const scrollToSection = (id: string, path: string) => {
     setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -90; // header offset
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+    setActiveSection(id);
     navigate(path);
+
+    const performScroll = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        const yOffset = -90; // header offset
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+
+    performScroll();
+    requestAnimationFrame(() => performScroll());
+    setTimeout(performScroll, 150);
+    setTimeout(performScroll, 350);
   };
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
+      
+      // If reached bottom of page, highlight contact
+      const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      if (isBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
       for (let i = navLinks.length - 1; i >= 0; i--) {
         const section = document.getElementById(navLinks[i].id);
         if (section && section.offsetTop <= scrollPosition) {
